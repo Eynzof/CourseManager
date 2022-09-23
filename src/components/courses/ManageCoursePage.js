@@ -59,6 +59,10 @@ function ManageCoursePage({
             toast.success("Course Saved.")
             history.push('/courses');
             // setSaving(false);
+        }).catch(error => {
+            console.log("error occured")
+            setSaving(false);
+            setErrors({onSave: error.message })
         });
     }
 

@@ -8,8 +8,9 @@ export function getCourses() {
     .catch(handleError);
 }
 
+// 这是一个thunk，它返回的是函数
 export function saveCourse(course) {
-  console.log(course)
+  // console.log(course)
   return fetch(baseUrl + (course.id || ""), {
     method: course.id ? "PUT" : "POST", // POST for create, PUT to update when id already exists.
     headers: { "content-type": "application/json" },

@@ -67,8 +67,7 @@ function mapStateToProps(state) {
         : state.courses.map((course) => {
             return {
               ...course,
-              authorName: state.authors.find((a) => a.id === course.authorId)
-                .name,
+              authorName: state.authors.find((author) => author.id === course.authorId).name,
             };
           }),
     authors: state.authors,

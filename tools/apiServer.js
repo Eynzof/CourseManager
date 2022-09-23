@@ -43,8 +43,10 @@ server.use((req, res, next) => {
   // Continue to JSON Server router
   next();
 });
-// 这是一种 serverside-validation，确保传来的数据格式正确
+
 server.post("/courses/", function(req, res, next) {
+  // 这是一种 serverside-validation，确保传来的数据格式正确
+  console.log(req.body);
   const error = validateCourse(req.body);
   if (error) {
     res.status(400).send(error);
