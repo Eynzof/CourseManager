@@ -11,7 +11,7 @@ export function loadAuthorSuccess(authors) {
 // Action -> Reducer -> React
 export function loadAuthors() {
     return function (dispatch) {
-        dispatch(beginApiCall);
+        dispatch(beginApiCall());
         return authorApi.getAuthors().then(authors => {
             dispatch(loadAuthorSuccess(authors));
         }).catch(error => {
