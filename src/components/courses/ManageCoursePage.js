@@ -6,7 +6,8 @@ import PropTypes from "prop-types";
 import CourseForm from "./CourseForm";
 import { newCourse } from "../../../tools/mockData";
 
-import Spinner from "../../components/common/Spinner"
+import Spinner from "../../components/common/Spinner";
+import { toast} from "react-toastify";
 
 function ManageCoursePage({
     courses,
@@ -17,8 +18,10 @@ function ManageCoursePage({
     history,
     ...props
 }) {
+    // 这些东西叫 localState
     const [course, setCourse] = useState({ ...props.course });
     const [errors, setErrors] = useState({});
+    const [saving, setSaving] = useState(false);
 
     useEffect(() => {
         if (courses.length === 0) {
@@ -49,10 +52,13 @@ function ManageCoursePage({
 
     function handleSave(event) {
         event.preventDefault();
+        setSaving(true);
         // saveCourse is getting passed in by props, and it's being bound to dispatch via our mapDispatchProps declaration
         // this is different from the one at the top of the file
         saveCourse(course).then(() => {
+            toast.success("Course Saved.")
             history.push('/courses');
+            // setSaving(false);
         });
     }
 
@@ -64,6 +70,7 @@ function ManageCoursePage({
             authors={authors}
             onChange={handleChange}
             onSave={handleSave}
+            saving={saving}
         />
     );
 }
