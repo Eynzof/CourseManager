@@ -1,6 +1,6 @@
 import * as types from "./actionTypes";
 import * as courseApi from "../../api/courseApi";
-import { beginApiCall } from "./apiStatusActions";
+import { beginApiCall,apiCallError } from "./apiStatusActions";
 // 这些都是actions
 export function createCourse(course) {
   // 创建了一个 action{type, data}
@@ -29,6 +29,7 @@ export function loadCourses() {
         dispatch(loadCoursesSuccess(courses));
       })
       .catch((error) => {
+        dispatch(apiCallError(error))
         throw error;
       });
   };
@@ -43,8 +44,9 @@ export function saveCourse(course) {
         course.id
           ? dispatch(updateCourseSuccess(savedCourse))
           : dispatch(createCourseSuccess(savedCourse));
-      })
+      })  
       .catch((error) => {
+        dispatch(apiCallError(error))
         throw error;
       });
   };
