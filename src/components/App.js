@@ -8,6 +8,7 @@ import CoursesPage from "./courses/CoursesPage";
 import ManageCoursePage from "./courses/ManageCoursePage";
 import 'react-toastify/dist/ReactToastify.css';
 import { ToastContainer } from "react-toastify";
+import AuthorsPage from "./authors/AuthorsPage";
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
         {/* 下面这两个的顺序很重要 */}
         <Route path="/course/:slug" component={ManageCoursePage} />
         <Route path="/course" component={ManageCoursePage} />
+        <Route path="/authors" component={AuthorsPage} />
         <Route component={PageNotFound} />
       </Switch>
       <ToastContainer autoClose={3000} hideProgressBar />
