@@ -30,12 +30,21 @@ class CoursesPage extends React.Component {
     }
   }
 
-  handleDeleteCourse = course => {
-    toast.success("Course deleted")
-    this.props.actions.deleteCourse(course).catch(error => {
+  handleDeleteCourse = async course => {
+    toast.success("Course deleted");
+    try {
+      // 函数会在这里执行，然后暂停，直到这一行完成
+      await this.props.actions.deleteCourse(course);
+    } catch (error) {
       toast.error("Delete failed" + error.message, {autoClose: false})
-    });
+    }
   }
+  // handleDeleteCourse = course => {
+  //   toast.success("Course deleted")
+  //   this.props.actions.deleteCourse(course).catch(error => {
+  //     toast.error("Delete failed" + error.message, {autoClose: false})
+  //   });
+  // }
 
   render() {
     return (
