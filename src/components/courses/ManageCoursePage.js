@@ -52,6 +52,7 @@ function ManageCoursePage({
 
     function handleSave(event) {
         event.preventDefault();
+        if(!formIsValid()) return;    
         setSaving(true);
         // saveCourse is getting passed in by props, and it's being bound to dispatch via our mapDispatchProps declaration
         // this is different from the one at the top of the file
@@ -66,6 +67,17 @@ function ManageCoursePage({
         });
     }
 
+    function formIsValid() {
+        const { title, authorId, category} = course;
+        const errors = {};
+
+        if (!title) errors.title = "Title is required."
+        if(!authorId) errors.author = "Author is required"
+        if(!category) errors.category = "Category is required"
+
+        setErrors(errors);
+        return Object.keys(errors).length === 0;
+    }
     return authors.length === 0 || courses.length === 0 ? (<Spinner />) :(
           
         <CourseForm
